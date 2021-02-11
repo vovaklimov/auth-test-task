@@ -23,13 +23,15 @@
     "@nestjs/mongoose": "^7.2.3",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/swagger": "^4.7.12",
     "mongoose": "^5.11.15",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
