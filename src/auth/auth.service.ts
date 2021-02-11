@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { compare } from 'bcryptjs';
 import { UserService } from '../user/user.service';
 import { UserCredentials } from '../common/interfaces/user-credentials.interface';
 import { UserDocument } from '../user/schemas/user.schema';
@@ -25,10 +26,19 @@ export class AuthService {
   }: UserCredentials): Promise<Omit<UserDocument, 'password' | undefined>> {
     const user = await this.userService.findByEmail(email);
 
-    if (user && password === user.password) {
-      delete user.password;
+    if (!user) {
+      return;
+    }
+
+    const passwordsMatch = await this.verifyPassword(password, user.password);
+
+    if (passwordsMatch) {
       return user;
     }
+  }
+
+  async verifyPassword(passwordToVerify: string, storedPasswordHash: string) {
+    return compare(passwordToVerify, storedPasswordHash);
   }
 
   private async issueAccessToken(payload: Record<string, unknown>) {
