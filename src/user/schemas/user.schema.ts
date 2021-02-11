@@ -9,6 +9,8 @@ export class User {
   email: string;
 
   @Prop({ required: true })
+  /* TODO: It's an example application, password definitely shouldn't be stored as a plain string in production,
+    it should be hashed with one-way algorithm of some kind (https://www.npmjs.com/package/bcryptjs) */
   password: string;
 }
 
